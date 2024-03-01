@@ -1,0 +1,41 @@
+<View style={{flex: 1, padding: 24}}>
+            <ScrollView 
+                    style={styles.scrollView}>
+
+                    
+            <Text 
+            style=
+            {
+                {
+                    textAlign: 'center',
+                    fontSize: 100,
+                    fontFamily: 'Savoye LET'
+                }
+            }
+            >
+                
+                {atkuld2}
+            </Text>
+
+            
+            <Image source={{uri:Ipcim.Ipcim+atkuld4}} style={{width:224,height:160, backgroundColor: 'white', marginLeft: 'auto', marginRight: 'auto'}}   />
+
+
+            <Text
+            style=
+            {
+                styles.valamiszoveg
+               
+            }
+            >
+                {atkuld3}
+            </Text>
+            
+
+
+            
+            
+        <WebView source={{ uri:atkuld5}} style={{ flex: 1 }} />
+        
+        </ScrollView>
+        </View>
