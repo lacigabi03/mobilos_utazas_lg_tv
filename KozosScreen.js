@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, ScrollView, FlatList, Text, View, Button, Image, StyleSheet} from 'react-native';
 import Ipcim from './Ipcim';
 
+
 const KozosScreen = ({navigation}) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -42,6 +43,7 @@ const KozosScreen = ({navigation}) => {
       >
         Országok
       </Text>
+      
     <ScrollView 
       horizontal={true} 
       showsHorizontalScrollIndicator={false}

@@ -1,8 +1,9 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'; 
-import React from 'react';
-import { Text, View, SafeAreaView, Button, StyleSheet } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, View, SafeAreaView, ImageBackground, Button, StyleSheet, ScrollView, FlatList, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native'
 
 //--------   Hivatkozások   --------\\
 import Orszag from './Orszag'
@@ -20,10 +21,10 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function MasodikHomeScreen({ navigation }) {
-  const [isLoading, setLoading] = React.useState(true);
-  const [data, setData] = React.useState([]);
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const getMovies = async () => {
       try {
         const response = await fetch(Ipcim.Ipcim+"Orszag");
@@ -42,6 +43,7 @@ function MasodikHomeScreen({ navigation }) {
   return (
     <View style={{ backgroundColor: '#c5fffc'}}>
       <SafeAreaView />
+      <ScrollView>
       <Text 
         style={{
           fontSize: 40,
@@ -51,7 +53,205 @@ function MasodikHomeScreen({ navigation }) {
         }}>
         Országok
       </Text>
+      <ScrollView 
+        horizontal={true} 
+        showsHorizontalScrollIndicator={false}>
+        <FlatList
+          data={data}
+          keyExtractor={({Orszag_id}) => Orszag_id}
+          horizontal
+          renderItem={({item}) => (
+            <View 
+              style={{
+                flex: 2, 
+                paddingLeft: 10, 
+                paddingRight: 45, 
+                backgroundColor: '#ABEBC6', 
+                paddingTop: 20, 
+                paddingBottom: 20
+              }}>
+              <View>       
+                <Text style={{fontWeight:'bold', color: 'blue', fontSize: 25, textAlign: 'center'}}>
+                  {item.Orszag_nev}
+                </Text>
+                <Image 
+                  source={{uri:Ipcim.Ipcim+item.Orszag_zaszlo}} 
+                  style={{
+                    width:224,
+                    height:160, 
+                    backgroundColor: 'white', 
+                    marginLeft: 'auto', 
+                    marginRight: 'auto'                  
+                  }}   
+                />
+              </View>
+            </View>
+          )}
+        />
+      </ScrollView>
+      <Text 
+        style={{
+          fontSize: 40,
+          paddingTop: 30,
+          paddingBottom: 10,
+          marginLeft: 20
+        }}>
+        Nevezetességek
+      </Text>
+      <ScrollView 
+        horizontal={true} 
+        showsHorizontalScrollIndicator={false}>
+        <FlatList
+          data={data}
+          keyExtractor={({Orszag_id}) => Orszag_id}
+          horizontal
+          renderItem={({item}) => (
+            <View 
+              style={{
+                flex: 2, 
+                paddingLeft: 10, 
+                paddingRight: 45, 
+                backgroundColor: '#ABEBC6', 
+                paddingTop: 20, 
+                paddingBottom: 20
+              }}>
+              <View>       
+                <Text style={{fontWeight:'bold', color: 'blue', fontSize: 25, textAlign: 'center'}}>
+                  {item.Orszag_nev}
+                </Text>
+                <Image 
+                  source={{uri:Ipcim.Ipcim+item.Orszag_zaszlo}} 
+                  style={{
+                    width:224,
+                    height:160, 
+                    backgroundColor: 'white', 
+                    marginLeft: 'auto', 
+                    marginRight: 'auto'                  
+                  }}   
+                />
+              </View>
+            </View>
+          )}
+        />
+      </ScrollView>
 
+
+      <Text 
+        style={{
+          fontSize: 40,
+          paddingTop: 30,
+          paddingBottom: 10,
+          marginLeft: 20
+        }}>
+        Érdekességek
+      </Text>
+      <ScrollView 
+        horizontal={true} 
+        showsHorizontalScrollIndicator={false}>
+        <FlatList
+          data={data}
+          keyExtractor={({Orszag_id}) => Orszag_id}
+          horizontal
+          renderItem={({item}) => (
+            <View 
+              style={{
+                flex: 2, 
+                paddingLeft: 10, 
+                paddingRight: 45, 
+                backgroundColor: '#ABEBC6', 
+                paddingTop: 20, 
+                paddingBottom: 20
+              }}>
+              <View>       
+                <Text style={{fontWeight:'bold', color: 'blue', fontSize: 25, textAlign: 'center'}}>
+                  {item.Orszag_nev}
+                </Text>
+                <Image 
+                  source={{uri:Ipcim.Ipcim+item.Orszag_zaszlo}} 
+                  style={{
+                    width:224,
+                    height:160, 
+                    backgroundColor: 'white', 
+                    marginLeft: 'auto', 
+                    marginRight: 'auto'                  
+                  }}   
+                />
+              </View>
+            </View>
+          )}
+        />
+      </ScrollView>
+
+
+
+      <Text 
+        style={{
+          fontSize: 40,
+          paddingTop: 30,
+          paddingBottom: 10,
+          marginLeft: 20
+        }}>
+        Városok
+      </Text>
+      {/* 
+      <TouchableOpacity
+          style={styles.buttonFacebookStyle}
+          activeOpacity={0.5}>
+          <Image
+            source={{
+              uri:
+                'https://raw.githubusercontent.com/AboutReact/sampleresource/master/facebook.png',
+            }}
+            style={styles.buttonImageIconStyle}
+          />
+          <View style={styles.buttonIconSeparatorStyle} />
+          <Text style={styles.buttonTextStyle}>
+            Login Using Facebook
+          </Text>
+        </TouchableOpacity>
+        */}
+      <ScrollView 
+        horizontal={true} 
+        showsHorizontalScrollIndicator={false}>
+        <FlatList
+          data={data}
+          keyExtractor={({Orszag_id}) => Orszag_id}
+          horizontal
+          renderItem={({item}) => (
+            <View 
+              style={{
+                flex: 2, 
+                paddingLeft: 10, 
+                paddingRight: 45, 
+                backgroundColor: '#ABEBC6', 
+                paddingTop: 20, 
+                paddingBottom: 20
+              }}>
+              <View>       
+                <Text style={{fontWeight:'bold', color: 'blue', fontSize: 25, textAlign: 'center'}}>
+                  {item.Orszag_nev}
+                </Text>
+                <Image 
+                  source={{uri:Ipcim.Ipcim+item.Orszag_zaszlo}} 
+                  style={{
+                    width:224,
+                    height:160, 
+                    backgroundColor: 'white', 
+                    marginLeft: 'auto', 
+                    marginRight: 'auto'                  
+                  }}   
+                />
+              </View>
+            </View>
+          )}
+        />
+      </ScrollView>
+
+
+
+
+
+      </ScrollView>
     </View>
   );
 }
