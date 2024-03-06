@@ -117,7 +117,7 @@ const KozosScreen = ({navigation}) => {
                 <Button           
             
               onPress=
-              {() => navigation.navigate('Ujlap', 
+              {() => navigation.navigate('Orszagok', 
                 {
                   atkuld1:item.Orszag_id, 
                   atkuld2:item.Orszag_nev, 

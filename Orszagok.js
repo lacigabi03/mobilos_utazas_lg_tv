@@ -3,7 +3,7 @@ import {StyleSheet, View, Text,Image, ScrollView, SafeAreaView, Button} from 're
 import Ipcim from './Ipcim';
 import { WebView } from 'react-native-webview';
 
-const Ujlap = ({navigation, route}) => {
+const Orszagok = ({navigation, route}) => {
     const {atkuld1,atkuld2,atkuld3,atkuld4,atkuld5,atkuld6,atkuld7} = route.params
 
     return (
@@ -18,22 +18,7 @@ const Ujlap = ({navigation, route}) => {
             }
         >
             
-            <WebView
-                source=
-                {
-                    { 
-                        uri:atkuld5
-                    }
-                } 
-                style=
-                {
-                    { 
-                        width: 400,
-                        height: 100
-
-                    }
-                } 
-            />
+           
             
             <ScrollView 
                     style={styles.scrollView}
@@ -45,7 +30,8 @@ const Ujlap = ({navigation, route}) => {
                 {
                     textAlign: 'center',
                     fontSize: 100,
-                    fontFamily: 'Savoye LET'
+                    fontFamily: 'Savoye LET',
+                    paddingTop: 20
                 }
             }
             >
@@ -127,12 +113,33 @@ const Ujlap = ({navigation, route}) => {
                 height='45'
                 overflow='hidden'
                 paddingTop='10'
+                paddingBottom='20'
                 
                                         
               />
+
+
               </View>
             
-            
+              <WebView
+                source=
+                {
+                    { 
+                        uri:atkuld5
+                    }
+                } 
+                style=
+                {
+                    { 
+                        width: 400,
+                        height: 300,
+                        marginTop: 10, 
+                        marginBottom: 200,
+                        marginLeft: 10
+
+                    }
+                } 
+            />
                 
         
             </ScrollView>
@@ -167,4 +174,4 @@ const styles =StyleSheet.create({
     }
 });
 
-export default Ujlap;
+export default Orszagok;

@@ -6,16 +6,18 @@ import { Text, View, SafeAreaView, ImageBackground, Button, StyleSheet, ScrollVi
 import { TouchableOpacity } from 'react-native'
 
 //--------   Hivatkozások   --------\\
-import Orszag from './Orszag'
+
 import Varos from './Varos'
 import Felvitel from './Felvitel'
 import Lenyilo from './Lenyilo'
 import KozosScreen from './KozosScreen'
-import Ujlap from './Ujlap'
 import Video from './Video'
 import Nevjegy from './Nevjegy'
 import KeresesSzoveg from './KeresesSzoveg'
 import Ipcim from './Ipcim';
+import Nevezetessegek from './Nevezetessegek';
+import Orszagok from './Orszagok';
+import { Picker } from '@react-native-picker/picker';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -23,9 +25,10 @@ const Drawer = createDrawerNavigator();
 function MasodikHomeScreen({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [selectedNevezetessegek, setSelectedNevezetessegek] = useState();
 
   useEffect(() => {
-    const getMovies = async () => {
+    const getOrszag = async () => {
       try {
         const response = await fetch(Ipcim.Ipcim+"Orszag");
         const json = await response.json();
@@ -36,8 +39,33 @@ function MasodikHomeScreen({ navigation }) {
         setLoading(false);
       }
     };
+    getOrszag();
 
-    getMovies();
+    const getNevezetessegek = async () => {
+      try {
+          var adatok ={
+              "bevitel1":atkuld1
+          }
+      
+      const response = await fetch(Ipcim.Ipcim+"Nevezetessegek", 
+      {
+          method: "POST",
+          body: JSON.stringify(adatok),
+          headers: {"Content-type": "application/json; charset=UTF-8"}
+        }
+      )
+        const json = await response.json();
+        setData(json);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+
+    getNevezetessegek();
+
   }, []);
 
   return (
@@ -53,7 +81,9 @@ function MasodikHomeScreen({ navigation }) {
         }}>
         Országok
       </Text>
-      <ScrollView 
+
+        {/*  Országok */}
+        <ScrollView 
         horizontal={true} 
         showsHorizontalScrollIndicator={false}>
         <FlatList
@@ -74,16 +104,32 @@ function MasodikHomeScreen({ navigation }) {
                 <Text style={{fontWeight:'bold', color: 'blue', fontSize: 25, textAlign: 'center'}}>
                   {item.Orszag_nev}
                 </Text>
-                <Image 
-                  source={{uri:Ipcim.Ipcim+item.Orszag_zaszlo}} 
-                  style={{
-                    width:224,
-                    height:160, 
-                    backgroundColor: 'white', 
-                    marginLeft: 'auto', 
-                    marginRight: 'auto'                  
-                  }}   
-                />
+                <TouchableOpacity 
+                onPress=
+                {
+                  () => navigation.navigate('Orszagok',
+                  {
+                    atkuld1:item.Orszag_id,
+                    atkuld2:item.Orszag_nev,
+                    atkuld3:item.Orszag_szoveg,
+                    atkuld4:item.Orszag_zaszlo,
+                    atkuld5:item.Orszag_link
+                  })
+                } 
+                
+                > 
+          <Image
+            source={{uri:Ipcim.Ipcim+item.Orszag_zaszlo}} 
+            style={{
+              width:224,
+              height:160, 
+              backgroundColor: 'white', 
+              marginLeft: 'auto', 
+              marginRight: 'auto'
+            }}
+            
+          />
+        </TouchableOpacity>
               </View>
             </View>
           )}
@@ -98,12 +144,13 @@ function MasodikHomeScreen({ navigation }) {
         }}>
         Nevezetességek
       </Text>
+      {/*Nevezetességek*/}
       <ScrollView 
         horizontal={true} 
         showsHorizontalScrollIndicator={false}>
         <FlatList
           data={data}
-          keyExtractor={({Orszag_id}) => Orszag_id}
+          keyExtractor={({Nevezetesseg_id}) => Nevezetesseg_id}
           horizontal
           renderItem={({item}) => (
             <View 
@@ -115,20 +162,17 @@ function MasodikHomeScreen({ navigation }) {
                 paddingTop: 20, 
                 paddingBottom: 20
               }}>
-              <View>       
+              <View style=
+            {
+                {
+                    flex: 1,
+                    alignItems: 'center'
+                }
+            }>       
                 <Text style={{fontWeight:'bold', color: 'blue', fontSize: 25, textAlign: 'center'}}>
-                  {item.Orszag_nev}
+                  {item.Orszag_id}
                 </Text>
-                <Image 
-                  source={{uri:Ipcim.Ipcim+item.Orszag_zaszlo}} 
-                  style={{
-                    width:224,
-                    height:160, 
-                    backgroundColor: 'white', 
-                    marginLeft: 'auto', 
-                    marginRight: 'auto'                  
-                  }}   
-                />
+                
               </View>
             </View>
           )}
@@ -145,6 +189,8 @@ function MasodikHomeScreen({ navigation }) {
         }}>
         Érdekességek
       </Text>
+
+      {/*Érekességek*/}
       <ScrollView 
         horizontal={true} 
         showsHorizontalScrollIndicator={false}>
@@ -193,59 +239,26 @@ function MasodikHomeScreen({ navigation }) {
         }}>
         Városok
       </Text>
-      {/* 
-      <TouchableOpacity
-          style={styles.buttonFacebookStyle}
-          activeOpacity={0.5}>
-          <Image
-            source={{
-              uri:
-                'https://raw.githubusercontent.com/AboutReact/sampleresource/master/facebook.png',
-            }}
-            style={styles.buttonImageIconStyle}
-          />
-          <View style={styles.buttonIconSeparatorStyle} />
-          <Text style={styles.buttonTextStyle}>
-            Login Using Facebook
-          </Text>
-        </TouchableOpacity>
-        */}
-      <ScrollView 
-        horizontal={true} 
-        showsHorizontalScrollIndicator={false}>
-        <FlatList
-          data={data}
-          keyExtractor={({Orszag_id}) => Orszag_id}
-          horizontal
-          renderItem={({item}) => (
-            <View 
-              style={{
-                flex: 2, 
-                paddingLeft: 10, 
-                paddingRight: 45, 
-                backgroundColor: '#ABEBC6', 
-                paddingTop: 20, 
-                paddingBottom: 20
-              }}>
-              <View>       
-                <Text style={{fontWeight:'bold', color: 'blue', fontSize: 25, textAlign: 'center'}}>
-                  {item.Orszag_nev}
-                </Text>
-                <Image 
-                  source={{uri:Ipcim.Ipcim+item.Orszag_zaszlo}} 
-                  style={{
-                    width:224,
-                    height:160, 
-                    backgroundColor: 'white', 
-                    marginLeft: 'auto', 
-                    marginRight: 'auto'                  
-                  }}   
-                />
-              </View>
-            </View>
-          )}
-        />
-      </ScrollView>
+      {/*  VÁROSOK*/}
+      <View>
+      <Picker
+      style={{backgroundColor: '#EEDC81', position:'absolute', bottom: 0, left: 0, right: 0, }}
+      selectedValue={selectedNevezetessegek}
+      onValueChange={(itemValue, itemIndex) =>
+          setSelectedNevezetessegek(itemValue)
+                    }>
+    {data.map((item)=>{
+        return(
+            <Picker.Item label={item.Nevezetesseg_nev} />
+
+         
+	)}
+	)}
+  
+</Picker>
+      </View>
+        
+
 
 
 
@@ -264,8 +277,8 @@ function NotificationsScreen({ navigation }) {
   );
 }
 
-function Orszag_megjelenites({ navigation }) {
-  return <Orszag />;
+function Orszagok_megjelenites({ navigation }) {
+  return <Orszagok />;
 }
 
 function Varos_megjelenites({ navigation }) {
@@ -284,13 +297,14 @@ function Root({ navigation }) {
       }}
       initialRouteName="Főoldal">
       <Drawer.Screen name="Főoldal" component={MasodikHomeScreen} />
-      <Drawer.Screen name="Országok" component={Orszag_megjelenites} />
+      <Drawer.Screen name="Orszagok" component={Orszagok} />
       <Drawer.Screen name="Felvitel" component={Felvitel} />
       <Drawer.Screen name="Lenyilo" component={Lenyilo} />
       <Drawer.Screen name="KözösScreen" component={KozosScreen} />
       <Drawer.Screen name="Videó" component={Video} />
       <Drawer.Screen name="Névjegy" component={Nevjegy} />
       <Drawer.Screen name="KeresésSzöveg" component={KeresesSzoveg} />
+      <Drawer.Screen name="Nevezetessegek" component={Nevezetessegek} />
     </Drawer.Navigator>
   );
 }
@@ -300,7 +314,9 @@ export default function App() {
     <NavigationContainer independent={true}>
       <Stack.Navigator>
         <Stack.Screen name="Vissza" component={Root} options={{ headerShown: false }} />
-        <Stack.Screen name="Ujlap" component={Ujlap} />
+        <Stack.Screen name="Orszagok" component={Orszagok} />
+        <Stack.Screen name="Nevezetessegek" component={Nevezetessegek} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

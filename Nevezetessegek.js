@@ -44,7 +44,7 @@ const Nevezetessegek = ({navigation, route}) => {
         <ActivityIndicator />
       ) : (
         <FlatList
-          data={data}
+          data={data} 
           keyExtractor={({Nevezetesseg_id}) => Nevezetesseg_id}
           renderItem={({item}) => (
             <View style=
