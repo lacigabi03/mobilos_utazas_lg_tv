@@ -25,7 +25,7 @@ const Drawer = createDrawerNavigator();
 function MasodikHomeScreen({ navigation }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [selectedNevezetessegek, setSelectedNevezetessegek] = useState();
+  
 
   useEffect(() => {
     const getOrszag = async () => {
@@ -41,30 +41,6 @@ function MasodikHomeScreen({ navigation }) {
     };
     getOrszag();
 
-    const getNevezetessegek = async () => {
-      try {
-          var adatok ={
-              "bevitel1":atkuld1
-          }
-      
-      const response = await fetch(Ipcim.Ipcim+"Nevezetessegek", 
-      {
-          method: "POST",
-          body: JSON.stringify(adatok),
-          headers: {"Content-type": "application/json; charset=UTF-8"}
-        }
-      )
-        const json = await response.json();
-        setData(json);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-  
-
-    getNevezetessegek();
 
   }, []);
 
@@ -148,35 +124,33 @@ function MasodikHomeScreen({ navigation }) {
       <ScrollView 
         horizontal={true} 
         showsHorizontalScrollIndicator={false}>
-        <FlatList
-          data={data}
-          keyExtractor={({Nevezetesseg_id}) => Nevezetesseg_id}
-          horizontal
-          renderItem={({item}) => (
-            <View 
-              style={{
-                flex: 2, 
-                paddingLeft: 10, 
-                paddingRight: 45, 
-                backgroundColor: '#ABEBC6', 
-                paddingTop: 20, 
-                paddingBottom: 20
-              }}>
-              <View style=
-            {
+             {/*   
+              <TouchableOpacity 
+                onPress=
                 {
-                    flex: 1,
-                    alignItems: 'center'
-                }
-            }>       
-                <Text style={{fontWeight:'bold', color: 'blue', fontSize: 25, textAlign: 'center'}}>
-                  {item.Orszag_id}
-                </Text>
+                  () => navigation.navigate('Nevezetessegek',
+                  {
+                    
+                    
+
+                  })
+                } 
+                title='Mehet'
                 
-              </View>
-            </View>
-          )}
-        />
+                > 
+          
+        </TouchableOpacity>
+        <Button
+          onPress=
+          {
+            () => navigation.navigate('Nevezetessegek')
+          }
+          title='Ugrás a nevezetességekre'
+        >
+        </Button> 
+              
+          */}
+        
       </ScrollView>
 
 
@@ -241,21 +215,7 @@ function MasodikHomeScreen({ navigation }) {
       </Text>
       {/*  VÁROSOK*/}
       <View>
-      <Picker
-      style={{backgroundColor: '#EEDC81', position:'absolute', bottom: 0, left: 0, right: 0, }}
-      selectedValue={selectedNevezetessegek}
-      onValueChange={(itemValue, itemIndex) =>
-          setSelectedNevezetessegek(itemValue)
-                    }>
-    {data.map((item)=>{
-        return(
-            <Picker.Item label={item.Nevezetesseg_nev} />
-
-         
-	)}
-	)}
-  
-</Picker>
+      
       </View>
         
 
