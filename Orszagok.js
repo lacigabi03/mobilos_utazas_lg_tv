@@ -18,58 +18,58 @@ const Orszagok = ({navigation, route}) => {
             }
         >
             
-           
-            
             <ScrollView 
                     style={styles.scrollView}
             >
-                    
-            <Text 
-            style=
-            {
-                {
-                    textAlign: 'center',
-                    fontSize: 100,
-                    fontFamily: 'Savoye LET',
-                    paddingTop: 20
-                }
-            }
-            >
+            <View style={styles.row}>
                 
+            <View>
+                <Text 
+                    style=
+                    {
+                        {
+                            textAlign: 'center',
+                            fontSize: 100,
+                            fontFamily: 'Savoye LET',
+                            paddingTop: 20
+                        }
+                    }
+                >
                 {atkuld2}
-            </Text>
+                </Text>
+            </View>
 
-            
-            <Image 
-                source=
-                {
+            <View>
+                <Image 
+                    source=
                     {
-                        uri:Ipcim.Ipcim+atkuld4
+                        {
+                            uri:Ipcim.Ipcim+atkuld4
+                        }
                     }
-                }
 
-                style=
-                {
+                    style=
                     {
-                        width:224,
-                        height:160, 
-                        backgroundColor: 'white', 
-                        marginLeft: 'auto', 
-                        marginRight: 'auto'
+                        {
+                            width:112,
+                            height:80, 
+                            backgroundColor: 'white', 
+                            marginLeft: 'auto', 
+                            marginRight: 'auto'
+                        }
+                    }   
+                />
+            </View>
+
+            </View>
+                <Text
+                    style=
+                    {
+                        styles.valamiszoveg 
                     }
-                }   
-            />
-
-
-            <Text
-            style=
-            {
-                styles.valamiszoveg
-               
-            }
-            >
+                >
                 {atkuld3}
-            </Text>
+                </Text>
 
             <View
                 style=
@@ -91,37 +91,29 @@ const Orszagok = ({navigation, route}) => {
                   }
                 }
             >
-            <Button           
-            
-              onPress=
-              {() => navigation.navigate('Nevezetessegek',
-              {
-                atkuld1:atkuld1,
-                atkuld6:atkuld6,
-                atkuld7:atkuld7
-              }
-                
-                  
-                  
-                  
-                
-                        )
-              }
+            <Button 
+                onPress=
+                    {() => navigation.navigate('Nevezetessegek',
+                        {
+                            atkuld1:atkuld1,
+                            atkuld5:atkuld5,
+                            atkuld6:atkuld6,
+                            atkuld7:atkuld7
+                        }
+                    )}
                 title="Részletek"
                 color="red"
                 fontSize='20'
                 height='45'
                 overflow='hidden'
                 paddingTop='10'
-                paddingBottom='20'
-                
-                                        
-              />
+                paddingBottom='20'                        
+            />
 
 
-              </View>
+            </View>
             
-              <WebView
+            <WebView
                 source=
                 {
                     { 
@@ -171,7 +163,13 @@ const styles =StyleSheet.create({
     scrollView : {
         backgroundColor: '#D1F2EB',
         flex: 1
-    }
+    },
+    row: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        paddingTop: 10
+      },
 });
 
 export default Orszagok;

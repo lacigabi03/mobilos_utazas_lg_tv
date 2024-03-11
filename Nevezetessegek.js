@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList, Text, View, Button, Alert, Image} from 'react-native';
+import {ActivityIndicator, FlatList, Text, View, Button, ImageBackground, Image} from 'react-native';
 import Ipcim from './Ipcim';
 import { WebView } from 'react-native-webview';
 
@@ -39,7 +39,8 @@ const Nevezetessegek = ({navigation, route}) => {
 
     
   return (
-    <View style={{flex: 1, padding: 24}}>
+    <ImageBackground source={require('./hatter1234.png')} style={{width: '100%', height: '100%'}}>
+    <View style={{flex: 1, padding: 24, }}>
       {isLoading ? (
         <ActivityIndicator />
       ) : (
@@ -51,7 +52,8 @@ const Nevezetessegek = ({navigation, route}) => {
             {
                 {
                     flex: 1,
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    
                 }
             }>
             <Text style = 
@@ -60,13 +62,14 @@ const Nevezetessegek = ({navigation, route}) => {
                 color: "brown",
                 fontSize: 35,
                 textAlign: "center",
-                marginTop: 20,
-                marginBottom: 5
+                marginTop: 10,
+                marginBottom: 5,
+                backgroundColor: 'pink'
               }
             }>
-              {item.Orszag_id}, 
-              {item.Nevezetesseg_nev}, 
-              {item.Nevezetesseg_szoveg}
+               
+              |- {item.Nevezetesseg_nev} -|
+              
             </Text>
 
             <Image 
@@ -80,16 +83,34 @@ const Nevezetessegek = ({navigation, route}) => {
                 style=
                 {
                     {
-                        width:224,
-                        height:160, 
-                        backgroundColor: 'white', 
+                        width:300,
+                        height:200, 
                         marginLeft: 'auto', 
-                        marginRight: 'auto'
+                        marginRight: 'auto',
+                        resizeMode: 'center'
                     }
                 }   
             />
 
-<WebView
+            <Text style = 
+            {
+              {
+                color: "brown",
+                fontSize: 35,
+                textAlign: "center",
+                marginTop: 20,
+                marginBottom: 5,
+                backgroundColor: '#DAF7A6'
+              }
+            }>
+               
+               
+              {item.Nevezetesseg_szoveg}
+            </Text>
+
+            
+
+            <WebView
                 source=
                 {
                     { 
@@ -99,8 +120,11 @@ const Nevezetessegek = ({navigation, route}) => {
                 style=
                 {
                     { 
-                        width: 400,
-                        height: 100
+                      width: 300,
+                      height: 200,
+                      marginTop: 10, 
+                      marginBottom: 80,
+                      marginLeft: 10
 
                     }
                 } 
@@ -112,6 +136,7 @@ const Nevezetessegek = ({navigation, route}) => {
         />
       )}
     </View>
+    </ImageBackground>
   );
 };
 
