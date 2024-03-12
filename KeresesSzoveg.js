@@ -78,7 +78,7 @@ const KeresesSzoveg = () => {
             <Text style=
             {
               {
-                textAlign:'center', 
+                alignItems:'center', 
                 paddingTop: 5, 
                 fontSize: 40, 
                 backgroundColor: '#DEFF96',

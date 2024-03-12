@@ -17,6 +17,7 @@ import KeresesSzoveg from './KeresesSzoveg'
 import Ipcim from './Ipcim';
 import Nevezetessegek from './Nevezetessegek';
 import Orszagok from './Orszagok';
+import KeresesNevezetessegek from './KeresNevezetessegek';
 import { Picker } from '@react-native-picker/picker';
 
 const Stack = createStackNavigator();
@@ -25,8 +26,7 @@ const Drawer = createDrawerNavigator();
 function MasodikHomeScreen({ navigation, route }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const {atkuld1,} = route.params
-  
+  const atkuld1 = route.params ? route.params.atkuld1 : null;
 
   useEffect(() => {
     const getOrszag = async () => {
@@ -44,10 +44,11 @@ function MasodikHomeScreen({ navigation, route }) {
 
 
   }, [])
+
   const getNevezetessegek = async () => {
     try {
         var adatok ={
-            "bevitel1":atkuld1
+            "bevitel1": atkuld1
         }
     
     const response = await fetch(Ipcim.Ipcim+"Nevezetessegek", 
@@ -67,141 +68,154 @@ function MasodikHomeScreen({ navigation, route }) {
   };
 
   useEffect(() => {
-    getNevezetessegek();
-  }, []);
+    if (atkuld1) {
+      getNevezetessegek();
+    }
+  }, [atkuld1]);
 
- 
-
-  return (          //orszagok_322_fda
+  return (
     <View style={{ backgroundColor: '#c5fffc'}}>
       <SafeAreaView>
-      <ScrollView>
-  <View>
-    <ImageBackground
-      source={require('./orszagok_322_fda.jpg')}>
-      <Text 
-        style={{
-          fontSize: 40,
-          marginLeft: 20,
-          marginRight: 260,
-          marginBottom: 10,
-          marginTop: 19,
-          backgroundColor: 'grey',
-          opacity: 0.9
-        }}>
-        Országok
-      </Text>
-    </ImageBackground>
-  </View>
+        <ScrollView>
+          <View>
+            <ImageBackground
+              source={require('./orszagok_322_fda.jpg')}>
+              <Text 
+                style={{
+                  fontSize: 40,
+                  marginLeft: 20,
+                  marginRight: 260,
+                  marginBottom: 10,
+                  marginTop: 19,
+                  backgroundColor: 'grey',
+                  opacity: 0.9
+                }}>
+                Országok
+              </Text>
+            </ImageBackground>
+          </View>
 
-  {/* Országok */}
-  <ScrollView 
-    horizontal={true} 
-    showsHorizontalScrollIndicator={false}>
-    {data.map((item) => (
-      <View 
-        key={item.Orszag_id}
-        style={{
-          flex: 2, 
-          paddingLeft: 10, 
-          paddingRight: 45, 
-          backgroundColor: '#319ee0', 
-          paddingTop: 20, 
-          paddingBottom: 20
-        }}>
-        <View>       
-          <Text 
-            style={{
-              fontWeight:'bold', 
-              color: 'blue', 
-              fontSize: 25, 
-              textAlign: 'center'
-            }}>
-            {item.Orszag_nev}
-          </Text>
-          <TouchableOpacity 
-            onPress={() => navigation.navigate('Orszagok', {
-              atkuld1:item.Orszag_id,
-              atkuld2:item.Orszag_nev,
-              atkuld3:item.Orszag_szoveg,
-              atkuld4:item.Orszag_zaszlo,
-              atkuld5:item.Orszag_link
-            })} 
-          > 
-            <Image
-              source={{uri:Ipcim.Ipcim+item.Orszag_zaszlo}} 
-              style={{
-                width:224,
-                height:160, 
-                backgroundColor: 'white', 
-                marginLeft: 'auto', 
-                marginRight: 'auto'
-              }}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
-    ))}
-  </ScrollView>
-  <View>
-    <ImageBackground
-      source={require('./nevezetes_411.jpg')}>
-        <View
-        style=
-        {
-          { 
-            backgroundColor: '#f4ffc5',
-            marginLeft: 20,
-            marginRight: 245,
-            marginBottom: 20,
-            marginTop: 20,
-            overflow:'hidden',
-            borderRadius:10,  
-            alignItems: 'center',  
-            
-          }
-        }>
-      <Text 
-        style={{
-          fontSize: 25,
-          backgroundColor: '#f4ffc5',
-          opacity: 0.8,
-          borderRadius:10,
-        
-        }}>
-        Nevezetességek
-      </Text>
-      </View>
-    </ImageBackground>
-  </View>
-  
-  {/* Nevezetességek */}
-  <ScrollView 
-    horizontal={true} 
-    showsHorizontalScrollIndicator={false}>
-    <TouchableOpacity
-      onPress={() => navigation.navigate('Nevezetessegek', {
-        
-      })}>
-{/*
-        atkuld1:data[0].Orszag_id,
-        atkuld5:item.Nevezetesseg_nev,
-        atkuld6:item.Nevezetesseg_szoveg,
-        atkuld7:item.Nevezeteseeg_kep,
-        atkuld8:item.Nevezetesseg_video
-        */} 
-      </TouchableOpacity>
-  </ScrollView>
-</ScrollView>
+          {/* Országok */}
+          <ScrollView 
+            horizontal={true} 
+            showsHorizontalScrollIndicator={false}>
+            {data.map((item) => (
+              <View 
+                key={item.Orszag_id}
+                style={{
+                  flex: 2, 
+                  paddingLeft: 10, 
+                  paddingRight: 45, 
+                  backgroundColor: '#319ee0', 
+                  paddingTop: 20, 
+                  paddingBottom: 20
+                }}>
+                <View>       
+                  <Text 
+                    style={{
+                      fontWeight:'bold', 
+                      color: 'blue', 
+                      fontSize: 25, 
+                      alignItems: 'center'
+                    }}>
+                    {item.Orszag_nev}
+                  </Text>
+                  <TouchableOpacity 
+                    onPress={() => navigation.navigate('Orszagok', {
+                      atkuld1:item.Orszag_id,
+                      atkuld2:item.Orszag_nev,
+                      atkuld3:item.Orszag_szoveg,
+                      atkuld4:item.Orszag_zaszlo,
+                      atkuld5:item.Orszag_link
+                    })} 
+                  > 
+                    <Image
+                      source={{uri:Ipcim.Ipcim+item.Orszag_zaszlo}} 
+                      style={{
+                        width:224,
+                        height:160, 
+                        backgroundColor: 'white', 
+                        marginLeft: 'auto', 
+                        marginRight: 'auto'
+                      }}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            ))}
+          </ScrollView>
+          <View>
+            <ImageBackground
+              source={require('./nevezetes_411.jpg')}>
+                <View
+                  style=
+                  {
+                    { 
+                      backgroundColor: '#f4ffc5',
+                      marginLeft: 20,
+                      marginRight: 245,
+                      marginBottom: 20,
+                      marginTop: 20,
+                      overflow:'hidden',
+                      borderRadius:10,  
+                      alignItems: 'center',  
+                    }
+                  }>
+              <Text 
+                style={{
+                  fontSize: 25,
+                  backgroundColor: '#f4ffc5',
+                  opacity: 0.8,
+                  borderRadius:10,
+                }}>
+                Nevezetességek
+              </Text>
+              </View>
+            </ImageBackground>
+          </View>
+          
+          {/* Nevezetességek */}
+          <ScrollView   
+            horizontal={true} 
+            showsHorizontalScrollIndicator={false}>
+            {data.map((item) => (
+              <View 
+                key={item.Orszag_id}
+                style={{
+                  flex: 2, 
+                  paddingLeft: 10, 
+                  paddingRight: 45, 
+                  backgroundColor: '#319ee0', 
+                  paddingTop: 20, 
+                  paddingBottom: 20
+                }}>
+                <View>
+                <TouchableOpacity
+              onPress={() => navigation.navigate('Nevezetessegek', {
+                atkuld1:item.Orszag_id,
+                atkuld2:item.Orszag_nev,
+                atkuld5:item.Nevezetesseg_nev,
+                atkuld6:item.Nevezetesseg_szoveg,
+                atkuld7:item.Nevezetesseg_kep,
+                atkuld8:item.Nevezetesseg_video,
+              })}> 
+              <Text 
+                    style={{
+                      fontWeight:'bold', 
+                      color: 'blue', 
+                      fontSize: 25, 
+                      alignItems: 'center'
+                    }}>
+                    {item.Orszag_nev}
+                  </Text>
+            </TouchableOpacity>       
+                  
+            </View>
+              </View>
+            ))}
+          </ScrollView>
+        </ScrollView>
       </SafeAreaView>
-    </View>
-  );
-}
-
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={styles.notificationsscreen}>
-      <Button onPress={() => navigation.goBack()} title="Vissza a főoldalra" />
     </View>
   );
 }
@@ -234,6 +248,7 @@ function Root({ navigation }) {
       <Drawer.Screen name="Névjegy" component={Nevjegy} />
       <Drawer.Screen name="KeresésSzöveg" component={KeresesSzoveg} />
       <Drawer.Screen name="Nevezetessegek" component={Nevezetessegek} />
+      <Drawer.Screen name="KeresNevezetessegek" component={KeresesNevezetessegek}/>
     </Drawer.Navigator>
   );
 }
@@ -245,6 +260,8 @@ export default function App() {
         <Stack.Screen name="Vissza" component={Root} options={{ headerShown: false }} />
         <Stack.Screen name="Orszagok" component={Orszagok} />
         <Stack.Screen name="Nevezetessegek" component={Nevezetessegek} />
+        <Stack.Screen name="KeresesNevezetessegek" component={KeresesNevezetessegek} />
+
 
       </Stack.Navigator>
     </NavigationContainer>

@@ -4,7 +4,7 @@ import Ipcim from './Ipcim';
 import { WebView } from 'react-native-webview';
 
 const Orszagok = ({navigation, route}) => {
-    const {atkuld1,atkuld2,atkuld3,atkuld4,atkuld5,atkuld6,atkuld7} = route.params
+    const {atkuld1,atkuld2,atkuld3,atkuld4,atkuld5,atkuld6,atkuld7,atkuld8 } = route.params
 
     return (
         
@@ -98,7 +98,8 @@ const Orszagok = ({navigation, route}) => {
                             atkuld1:atkuld1,
                             atkuld5:atkuld5,
                             atkuld6:atkuld6,
-                            atkuld7:atkuld7
+                            atkuld7:atkuld7,
+                            atkuld8:atkuld8
                         }
                     )}
                 title="Részletek"
