@@ -6,11 +6,11 @@ import Ipcim from './Ipcim';
 const App = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [selectedSeged, setSelectedSeged] = useState();
+  const [selectedOrszag, setSelectedOrszag] = useState();
 
-  const getMovies = async () => {
+  const getOrszag = async () => {
     try {
-      const response = await fetch(Ipcim.Ipcim + 'segedVaros');
+      const response = await fetch(Ipcim.Ipcim + 'orszag');
       const json = await response.json();
       setData(json);
     } catch (error) {
@@ -21,24 +21,24 @@ const App = () => {
   };
 
   const kattintas=()=>{
-    alert(selectedSeged)
+    alert(selectedOrszag)
   }
 
   useEffect(() => {
-    getMovies();
+    getOrszag();
   }, []);
 
   return (
     <View style={{flex: 1, padding: 10, backgroundColor: '#AA23'}}>
 
 <Picker
-  selectedValue={selectedSeged}
+  selectedValue={selectedOrszag}
   onValueChange={(itemValue, itemIndex) =>
-    setSelectedSeged(itemValue)
+    setSelectedOrszag(itemValue)
   }>
     {data.map((item)=>{
         return(
-            <Picker.Item label={item.seged_nev} value={item.seged_id} />
+            <Picker.Item label={item.Orszag_nev} value={item.Orszag_id} />
          
 	)}
 	)}

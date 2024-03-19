@@ -1,11 +1,37 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text,Image, ScrollView, SafeAreaView, Button} from 'react-native';
 import Ipcim from './Ipcim';
 import { WebView } from 'react-native-webview';
+import { TouchableOpacity } from 'react-native';
+import { Linking } from 'react-native';
 
 const Orszagok = ({navigation, route}) => {
-    const {atkuld1,atkuld2,atkuld3,atkuld4,atkuld5,atkuld6,atkuld7,atkuld8 } = route.params
+    const {atkuld1,atkuld2,atkuld3,atkuld4,atkuld5,atkuld6,atkuld7,atkuld8,atkuld9 } = route.params
 
+    const [isLoading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+    const [selectedOrszag, setSelectedOrszag] = useState();
+  
+    const getOrszag = async () => {
+      try {
+        const response = await fetch(Ipcim.Ipcim + 'orszag');
+        const json = await response.json();
+        setData(json);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    const kattolás=() =>{
+        alert(Orszag_nev)
+    }
+
+    useEffect(() => {
+        getOrszag();
+    }, []);
+
+    
     return (
         
         <SafeAreaView 
@@ -62,6 +88,28 @@ const Orszagok = ({navigation, route}) => {
             </View>
 
             </View>
+            
+            <TouchableOpacity onPress={() => Linking.openURL(atkuld9)}>
+            <Image 
+            source={require('./info1234.png')} 
+            style=
+                    {
+                        {
+                            width:90,
+                            height:90, 
+                            backgroundColor: 'white', 
+                            marginLeft: 20, 
+                            marginRight: 'auto'
+                        }
+                    }
+            />
+            
+            </TouchableOpacity>
+            
+
+        
+
+
                 <Text
                     style=
                     {
@@ -70,6 +118,19 @@ const Orszagok = ({navigation, route}) => {
                 >
                 {atkuld3}
                 </Text>
+                <View style={{backgroundColor: 'green', paddingBottom:20}}>
+                <Text>
+                    Fontos információk az országról
+                </Text>
+                
+                <TouchableOpacity
+                    onPress={() => kattolás()}
+                    title="Mehet"
+                    color="red"
+                    
+                
+                />
+                </View>
 
             <View
                 style=
@@ -117,9 +178,11 @@ const Orszagok = ({navigation, route}) => {
             <WebView
                 source=
                 {
+                    
                     { 
                         uri:atkuld5
                     }
+                
                 } 
                 style=
                 {

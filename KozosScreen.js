@@ -123,7 +123,8 @@ const KozosScreen = ({navigation}) => {
                   atkuld2:item.Orszag_nev, 
                   atkuld3:item.Orszag_szoveg, 
                   atkuld4:item.Orszag_zaszlo,
-                  atkuld5:item.Orszag_link
+                  atkuld5:item.Orszag_link,
+                  atkuld9:item.Orszag_konzuli,
 
                   
                 }

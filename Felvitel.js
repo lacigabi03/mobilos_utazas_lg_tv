@@ -1,11 +1,36 @@
-import React, { useState } from 'react';
-import { Button, Image, View, Text, TextInput, Platform } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Button, Image, View, Text, TextInput, Platform, ImageBackground,StyleSheet, } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Ipcim from './Ipcim';
+import { Picker } from '@react-native-picker/picker';
 
 export default function ImagePickerExample() {
   const [image, setImage] = useState(null);
   const [bevitel1, setBevitel1] = useState('');
+
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+  const [selectedOrszag, setSelectedOrszag] = useState();
+
+  const getOrszag = async () => {
+    try {
+      const response = await fetch(Ipcim.Ipcim + 'orszag');
+      const json = await response.json();
+      setData(json);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const kattintas=()=>{
+    alert(selectedOrszag)
+  }
+
+  useEffect(() => {
+    getOrszag();
+  }, []);
 
   const SERVER_URL = Ipcim.Ipcim;
 /*
@@ -98,23 +123,136 @@ const createFormData = (photo, body = {}) => {
   };
 
   return (
+    <ImageBackground source={require('./felvielhatter.jpg')} style={{width: '100%', height: '100%'}}>
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{paddingBottom: 20, }}>
+    <View 
+    style=
+    {
+      {
+        backgroundColor: "#fffea2",
+        borderRadius:10,
+        paddingLeft: 80,
+        paddingRight: 80,
+        paddingTop:20,
+        paddingBottom:20,
+        opacity: 0.7
+      }
+    }>
+    <Text style=
+    {
+      {
+        padding: 10, 
+        color:"red",
+        textAlign: 'center',
+        fontSize: 20
+      }
+    }>
+      Add meg a nevezetesség kép nevét:
+    </Text>
 
-    <Text style={{padding: 10}}>
-      Név:
-      </Text>
-      
-      <TextInput
-        style={{height: 40, margin:5, backgroundColor:"cyan"}}
+    <TextInput
+        style=
+        {
+          {
+          height: 60, 
+          margin:5, 
+          backgroundColor:"red",
+          paddingLeft: 5,
+          paddingRight: 5
+          }      
+        }
         placeholder="Írd be a nevet!"
         onChangeText={newText => setBevitel1(newText)}
         defaultValue={bevitel1}
     />
-     
-      <Button title="Kép feltöltése" onPress={handleUploadPhoto} />
-      <Button title="Válaszd ki a képet a gallériádból" onPress={pickImage} />
-      {image && <Image source={{ uri: image.uri }} style={{ width: 200, height: 200 }} />}
-      
+    
     </View>
+    <View style={{backgroundColor:"#fffea2", borderRadius: 10, opacity: 0.7}}>
+    <Text style=
+    {
+      {
+        padding: 10, 
+        color:"red",
+        textAlign: 'center',
+        fontSize: 20
+      }
+    }>
+      Valaszd ki az országot:
+    </Text>
+    <Picker
+        
+      selectedValue={selectedOrszag}
+      onValueChange={(itemValue, itemIndex) =>
+      setSelectedOrszag(itemValue)
+      }
+    >
+  {data.map((item)=>{
+      return(
+          <Picker.Item label={item.Orszag_nev} value={item.Orszag_id} key={item.Orszag_id}/>
+      )}
+  )}
+</Picker>
+
+</View>
+<View style={{paddingBottom:20, paddingTop:1}}>
+    <View style=
+    {
+      {
+        backgroundColor: "#6fff75",
+        borderRadius: 10
+      }
+    }>
+    
+    <Button title="Válaszd ki a képet a gallériádból" onPress={pickImage} />
+      {image && <Image source={{ uri: image.uri }} style={{ width: 200, height: 200 }} />}
+    </View>
+    </View>
+    </View>
+
+    {/* Kép feltöltés BUTTON */}
+    
+    <View style={{paddingBottom:20, paddingTop:20,}}>
+    <View style=
+    {
+      {
+        backgroundColor: "#fe9023",
+        borderRadius: 10,
+        
+         
+      }
+    }>
+    <Button title="Kép feltöltése" onPress={handleUploadPhoto} />
+    </View>
+    </View>  
+  
+
+    
+      
+    
+    
+    </View>
+     
+      
+      
+      
+    
+    </ImageBackground>
+
+
+
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 22,
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+    color: 'red'
+  },
+});
