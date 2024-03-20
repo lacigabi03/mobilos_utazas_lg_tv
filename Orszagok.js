@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text,Image, ScrollView, SafeAreaView, Button} from 'react-native';
+import {StyleSheet, View, Text,Image, ScrollView, SafeAreaView, Button, Alert} from 'react-native';
 import Ipcim from './Ipcim';
 import { WebView } from 'react-native-webview';
 import { TouchableOpacity } from 'react-native';
 import { Linking } from 'react-native';
 
 const Orszagok = ({navigation, route}) => {
-    const {atkuld1,atkuld2,atkuld3,atkuld4,atkuld5,atkuld6,atkuld7,atkuld8,atkuld9 } = route.params
+    const {atkuld1, atkuld2, atkuld3, atkuld4, atkuld5, atkuld6, atkuld7, atkuld8, atkuldkon, atkuldval, atkuldido, atkuldvizum } = route.params
 
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
     const [selectedOrszag, setSelectedOrszag] = useState();
-  
+    
     const getOrszag = async () => {
       try {
         const response = await fetch(Ipcim.Ipcim + 'orszag');
@@ -23,12 +23,12 @@ const Orszagok = ({navigation, route}) => {
         setLoading(false);
       }
     };
-    const kattolás=() =>{
-        alert(Orszag_nev)
-    }
+    
 
     useEffect(() => {
+        alert(atkuldkon)
         getOrszag();
+               
     }, []);
 
     
@@ -89,17 +89,29 @@ const Orszagok = ({navigation, route}) => {
 
             </View>
             
-            <TouchableOpacity onPress={() => Linking.openURL(atkuld9)}>
+            <View style={styles.row}>
+            <TouchableOpacity onPress={() => {
+                if (atkuldkon) {
+                    Linking.openURL(atkuldkon);
+                }
+                else
+                {
+                    console.error("nem jó :( ");
+                }
+                }
+            }
+            >
             <Image 
             source={require('./info1234.png')} 
             style=
                     {
                         {
-                            width:90,
-                            height:90, 
-                            backgroundColor: 'white', 
+                            width:70,
+                            height:70, 
+                            backgroundColor: '#D1F2EB', 
                             marginLeft: 20, 
-                            marginRight: 'auto'
+                            marginRight: 'auto',
+                            marginBottom: 2
                         }
                     }
             />
@@ -107,31 +119,112 @@ const Orszagok = ({navigation, route}) => {
             </TouchableOpacity>
             
 
+            <TouchableOpacity onPress={() => {
+                if (atkuldval) {
+                    alert(atkuldval);
+                }
+                else
+                {
+                    Alert.alert("nem jó :( ");
+                }
+                }
+            }
+            >
+            <Image 
+            source={require('./valuta1230.png')} 
+            style=
+                    {
+                        {
+                            width:70,
+                            height:70, 
+                            backgroundColor: '#D1F2EB', 
+                            marginLeft: 20, 
+                            marginRight: 'auto'
+                        }
+                    }
+            />
+            
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => {
+                if (atkuldido) {
+                    alert(atkuldido);
+                }
+                else
+                {
+                    Alert.alert("nem jó :( ");
+                }
+                }
+            }
+            >
+            <Image 
+            source={require('./idozona321.png')} 
+            style=
+                    {
+                        {
+                            width:70,
+                            height:70, 
+                            backgroundColor: '#D1F2EB', 
+                            marginLeft: 20, 
+                            marginRight: 'auto'
+                        }
+                    }
+            />
+            
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={() => {
+                if (atkuldvizum) {
+                    alert(atkuldvizum);
+                }
+                else
+                {
+                    Alert.alert("nem jó :( ");
+                }
+                }
+            }
+            >
+            <Image 
+            source={require('./vizum123.png')} 
+            style=
+                    {
+                        {
+                            width:70,
+                            height:70, 
+                            backgroundColor: '#D1F2EB', 
+                            marginLeft: 20, 
+                            marginRight: 'auto'
+                        }
+                    }
+            />
+            
+            </TouchableOpacity>
+            </View>
+
+
+
+
+
+
+            <View style={styles.row2}>
+                <Text>Információk</Text>
+                <Text>Valuta</Text>
+                <Text>Időzóna</Text>
+                <Text>Vízum</Text>               
+            </View>
         
 
 
                 <Text
                     style=
                     {
-                        styles.valamiszoveg 
+                        styles.valamiszoveg
+                       
                     }
                 >
                 {atkuld3}
                 </Text>
-                <View style={{backgroundColor: 'green', paddingBottom:20}}>
-                <Text>
-                    Fontos információk az országról
-                </Text>
                 
-                <TouchableOpacity
-                    onPress={() => kattolás()}
-                    title="Mehet"
-                    color="red"
-                    
-                
-                />
-                </View>
-
             <View
                 style=
                 {
@@ -146,7 +239,7 @@ const Orszagok = ({navigation, route}) => {
                     height:45,
                     overflow:'hidden',
                     borderRadius:10,
-                    backgroundColor:'#0C37DA',
+                    backgroundColor:'#FFEB76',
                     borderRadius:20
                         
                   }
@@ -169,7 +262,8 @@ const Orszagok = ({navigation, route}) => {
                 height='45'
                 overflow='hidden'
                 paddingTop='10'
-                paddingBottom='20'                        
+                paddingBottom='20'
+                                        
             />
 
 
@@ -180,7 +274,7 @@ const Orszagok = ({navigation, route}) => {
                 {
                     
                     { 
-                        uri:atkuld5
+                        uri:atkuld5 
                     }
                 
                 } 
@@ -214,7 +308,7 @@ const styles =StyleSheet.create({
         alginItems: 'center',
         justifyContent: 'center',
         paddingTop: 20, 
-        backgroundColor: '#D1F2EB'
+        backgroundColor: '#D1F2EB',
         
     },
     valamiszoveg: {
@@ -222,7 +316,8 @@ const styles =StyleSheet.create({
         fontFamily: 'Avenir Next Condensed',
         paddingTop: 35,
         marginLeft: 10,
-        marginRight: 10
+        marginRight: 10,
+        
     },
     scrollView : {
         backgroundColor: '#D1F2EB',
@@ -232,7 +327,15 @@ const styles =StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-around',
-        paddingTop: 10
+        paddingTop: 10,
+      },
+      row2: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        backgroundColor:"#9CC7FF",
+       
+
       },
 });
 

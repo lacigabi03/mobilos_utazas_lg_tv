@@ -74,7 +74,7 @@ function MasodikHomeScreen({ navigation, route }) {
   }, [atkuld1]);
 
   return (
-    <View style={{ backgroundColor: '#c5fffc'}}>
+    <View style={{ backgroundColor: '#c5fffc', paddingBottom:350}}>
       <SafeAreaView>
         <ScrollView>
           <View>
@@ -233,14 +233,14 @@ function Root({ navigation }) {
     <Drawer.Navigator
       screenOptions={{
         drawerStyle: {
-          backgroundColor: 'lightgreen',
+          backgroundColor: '#559EFF',
           color: 'red',
         },
         headerShown: true,
       }}
-      initialRouteName="Főoldal">
+      initialRouteName="Főoldal"> 
       <Drawer.Screen name="Főoldal" component={MasodikHomeScreen} />
-      <Drawer.Screen name="Orszagok" component={Orszagok} />
+      <Drawer.Screen name="Orszagok" component={Orszagok}/>
       <Drawer.Screen name="Felvitel" component={Felvitel} />
       <Drawer.Screen name="Lenyilo" component={Lenyilo} />
       <Drawer.Screen name="KözösScreen" component={KozosScreen} />
@@ -253,11 +253,11 @@ function Root({ navigation }) {
   );
 }
 
-export default function App() {
+export default function App() {   
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator>
-        <Stack.Screen name="Vissza" component={Root} options={{ headerShown: false }} />
+        <Stack.Screen name="Vissza" component={Root} options={{ headerShown: true }} />
         <Stack.Screen name="Orszagok" component={Orszagok} />
         <Stack.Screen name="Nevezetessegek" component={Nevezetessegek} />
         <Stack.Screen name="KeresesNevezetessegek" component={KeresesNevezetessegek} />

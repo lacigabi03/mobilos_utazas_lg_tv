@@ -10,9 +10,10 @@ const KozosScreen = ({navigation}) => {
 
   const getMovies = async () => {
     try {
-      const response = await fetch(Ipcim.Ipcim+"Orszag");
+      const response = await fetch(Ipcim.Ipcim+"orszag");
       const json = await response.json();
       setData(json);
+      alert(JSON.stringify(json))
     } catch (error) {
       console.error(error);
     } finally {
@@ -124,11 +125,12 @@ const KozosScreen = ({navigation}) => {
                   atkuld3:item.Orszag_szoveg, 
                   atkuld4:item.Orszag_zaszlo,
                   atkuld5:item.Orszag_link,
-                  atkuld9:item.Orszag_konzuli,
+                  atkuldkon:item.Orszag_konzuli,
+                  atkuldval:item.Orszag_valuta,
+                  atkuldido:item.Orszag_idozona,
+                  atkuldvizum:Orszag_vizum
 
-                  
-                }
-                        )
+                })
               }
                 title="Részletek"
                 color="#F8F8F8"
