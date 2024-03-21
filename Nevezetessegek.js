@@ -4,14 +4,14 @@ import Ipcim from './Ipcim';
 import { WebView } from 'react-native-webview';
 
 const Nevezetessegek = ({navigation, route}) => {
-  const {atkuld1,} = route.params
+  const {atkuldOid,} = route.params
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
   const getNevezetessegek = async () => {
     try {
         var adatok ={
-            "bevitel1":atkuld1
+            "bevitel1":atkuldOid
         }
     
     const response = await fetch(Ipcim.Ipcim+"Nevezetessegek", 

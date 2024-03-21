@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, FlatList, Text, View} from 'react-native';
+import {ActivityIndicator, FlatList, Text, View, TouchableOpacity, Image, Alert} from 'react-native';
 import { WebView } from 'react-native-webview';
 
 const Nevjegy = () => {
@@ -23,36 +23,50 @@ const Nevjegy = () => {
   }, []);
 
   return (
-    <View style={{flex: 1, padding: 24, backgroundColor: '#AA23'}}>
-
-<WebView source={{ uri: 'https://www.youtube.com/?hl=hu&gl=HU' }} style={{ flex: 1 }} />
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        <FlatList
-          data={data}
-          keyExtractor={({id}) => id}
-          renderItem={({item}) => (
-            <Text style = 
-            {
-              {
-                color: "brown",
-                fontSize: 35,
-                textAlign: "center",
-                marginTop: 20,
-                marginBottom: 5
-              }
-            }>
-
+    <View style={{flex: 1, padding: 24, backgroundColor: '#D1F2EB', alignItems: 'center', paddingTop: 200}}>
+        <TouchableOpacity onPress={() => {
+                 {
+                    Alert.alert(
+                      "A szakdolgozatot készítette: "  
+                      + 
+                      "\nLászló Gábor"
+                      +
+                      "\n\n\nProjekt témája: "
+                      +
+                      "Utazás"
+                      +
+                      "\n\nCíme: ' Világ körül '"
+                      +
+                      "\n\n\n\nRöviden a programról"
+                      +
+                      "\n..."
+                    
+                      );
+                }
+                
+                }
+            }
+            >
+            <Image 
+            source={require('./nevjegy123.png')} 
+            style=
+                    {
+                        {
+                            width:200,
+                            height:200, 
+                            backgroundColor: '#D1F2EB', 
+                            marginLeft: 20, 
+                            marginRight: 'auto',
+                        }
+                    }
+            />
             
-                Készítette:
-              {item.Nevjegy_nev}, 
-              Ideje:
-              {item.Nevjegy_datum}
-            </Text>
-          )}
-        />
-      )}
+            </TouchableOpacity>
+            <Text style={{fontWeight:'bold', fontSize:'25'}}>Névjegy infórmációért katt a képre!</Text>
+      
+
+      
+      
     </View>
   );
 };

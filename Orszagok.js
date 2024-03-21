@@ -5,8 +5,8 @@ import { WebView } from 'react-native-webview';
 import { TouchableOpacity } from 'react-native';
 import { Linking } from 'react-native';
 
-const Orszagok = ({navigation, route}) => {
-    const {atkuld1, atkuld2, atkuld3, atkuld4, atkuld5, atkuld6, atkuld7, atkuld8, atkuldkon, atkuldval, atkuldido, atkuldvizum } = route.params
+const Orszagok_megjelenites = ({navigation, route}) => {
+    const {atkuldOid, atkuldOnev, atkuldOszoveg, atkuldOzaszlo, atkuldOlink, atkuldOkonzuli, atkuldOvaluta, atkuldOidozona, atkuldOvizum, atkuldNnev, atkuldNszoveg, atkuldNkep, atkuldNvideo } = route?.params ?? {};
 
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
@@ -21,12 +21,12 @@ const Orszagok = ({navigation, route}) => {
         console.error(error);
       } finally {
         setLoading(false);
-      }
+      } 
     };
     
-
+    
     useEffect(() => {
-        alert(atkuldkon)
+        //alert(atkuldOkonzuli)
         getOrszag();
                
     }, []);
@@ -61,7 +61,7 @@ const Orszagok = ({navigation, route}) => {
                         }
                     }
                 >
-                {atkuld2}
+                {atkuldOnev}
                 </Text>
             </View>
 
@@ -70,7 +70,7 @@ const Orszagok = ({navigation, route}) => {
                     source=
                     {
                         {
-                            uri:Ipcim.Ipcim+atkuld4
+                            uri:Ipcim.Ipcim+atkuldOzaszlo
                         }
                     }
 
@@ -90,15 +90,8 @@ const Orszagok = ({navigation, route}) => {
             </View>
             
             <View style={styles.row}>
-            <TouchableOpacity onPress={() => {
-                if (atkuldkon) {
-                    Linking.openURL(atkuldkon);
-                }
-                else
-                {
-                    console.error("nem jó :( ");
-                }
-                }
+            <TouchableOpacity onPress={() =>            
+                Linking.openURL(atkuldOkonzuli)
             }
             >
             <Image 
@@ -120,8 +113,8 @@ const Orszagok = ({navigation, route}) => {
             
 
             <TouchableOpacity onPress={() => {
-                if (atkuldval) {
-                    alert(atkuldval);
+                if (atkuldOvaluta) {
+                    Alert.alert(atkuldOvaluta);
                 }
                 else
                 {
@@ -147,8 +140,8 @@ const Orszagok = ({navigation, route}) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
-                if (atkuldido) {
-                    alert(atkuldido);
+                if (atkuldOidozona) {
+                    Alert.alert(atkuldOidozona);
                 }
                 else
                 {
@@ -174,8 +167,8 @@ const Orszagok = ({navigation, route}) => {
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => {
-                if (atkuldvizum) {
-                    alert(atkuldvizum);
+                if (atkuldOvizum) {
+                    Alert.alert(atkuldOvizum);
                 }
                 else
                 {
@@ -222,7 +215,7 @@ const Orszagok = ({navigation, route}) => {
                        
                     }
                 >
-                {atkuld3}
+                {atkuldOszoveg}
                 </Text>
                 
             <View
@@ -249,11 +242,11 @@ const Orszagok = ({navigation, route}) => {
                 onPress=
                     {() => navigation.navigate('Nevezetessegek',
                         {
-                            atkuld1:atkuld1,
-                            atkuld5:atkuld5,
-                            atkuld6:atkuld6,
-                            atkuld7:atkuld7,
-                            atkuld8:atkuld8
+                            atkuldOid:atkuldOid,
+                            atkuldNnev:atkuldNnev,
+                            atkuldNszoveg:atkuldNszoveg,
+                            atkuldNkep:atkuldNkep,
+                            atkuldNvideo:atkuldNvideo
                         }
                     )}
                 title="Részletek"
@@ -274,7 +267,7 @@ const Orszagok = ({navigation, route}) => {
                 {
                     
                     { 
-                        uri:atkuld5 
+                        uri:atkuldOlink 
                     }
                 
                 } 
@@ -339,4 +332,4 @@ const styles =StyleSheet.create({
       },
 });
 
-export default Orszagok;
+export default Orszagok_megjelenites;

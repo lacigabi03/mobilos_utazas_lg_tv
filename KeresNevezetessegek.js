@@ -9,7 +9,7 @@ const KeresesNevezetessegek = ({ route }) => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [text, setText] = useState('');
-  const atkuld1 = route.params ? route.params.atkuld1 : null;
+  const atkuldOid = route.params ? route.params.atkuldOid : null;
 
   const keresfuggveny = async () => {
     alert(text);
@@ -32,10 +32,10 @@ const KeresesNevezetessegek = ({ route }) => {
   };
 
   useEffect(() => {
-    if (atkuld1) {
+    if (atkuldOid) {
       getNevezetessegek();
     }
-  }, [atkuld1]);
+  }, [atkuldOid]);
 
   return (
     <View style={{ flex: 1, padding: 24, backgroundColor: '#4B693D' }}>

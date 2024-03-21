@@ -13,7 +13,7 @@ const KozosScreen = ({navigation}) => {
       const response = await fetch(Ipcim.Ipcim+"orszag");
       const json = await response.json();
       setData(json);
-      alert(JSON.stringify(json))
+      //alert(JSON.stringify(json))
     } catch (error) {
       console.error(error);
     } finally {
@@ -120,15 +120,15 @@ const KozosScreen = ({navigation}) => {
               onPress=
               {() => navigation.navigate('Orszagok', 
                 {
-                  atkuld1:item.Orszag_id, 
-                  atkuld2:item.Orszag_nev, 
-                  atkuld3:item.Orszag_szoveg, 
-                  atkuld4:item.Orszag_zaszlo,
-                  atkuld5:item.Orszag_link,
-                  atkuldkon:item.Orszag_konzuli,
-                  atkuldval:item.Orszag_valuta,
-                  atkuldido:item.Orszag_idozona,
-                  atkuldvizum:Orszag_vizum
+                     /*1*/ atkuldOid:item.Orszag_id,
+                      /*2*/ atkuldOnev:item.Orszag_nev,
+                      /*3*/ atkuldOszoveg:item.Orszag_szoveg,
+                      /*4*/ atkuldOzaszlo:item.Orszag_zaszlo,
+                      /*5*/ atkuldOlink:item.Orszag_link,
+                      /*6*/ atkuldOkonzuli:item.Orszag_konzuli,
+                      /*7*/ atkuldOvaluta:item.Orszag_valuta,
+                      /*8*/ atkuldOidozona:item.Orszag_idozona,
+                      /*9*/ atkuldOvizum:item.Orszag_vizum
 
                 })
               }

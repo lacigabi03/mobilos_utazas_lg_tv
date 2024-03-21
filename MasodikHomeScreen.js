@@ -26,7 +26,7 @@ const Drawer = createDrawerNavigator();
 function MasodikHomeScreen({ navigation, route }) {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const atkuld1 = route.params ? route.params.atkuld1 : null;
+  const atkuldOid = route.params ? route.params.atkuldOid : null;
 
   useEffect(() => {
     const getOrszag = async () => {
@@ -48,7 +48,7 @@ function MasodikHomeScreen({ navigation, route }) {
   const getNevezetessegek = async () => {
     try {
         var adatok ={
-            "bevitel1": atkuld1
+            "bevitel1": atkuldOid
         }
     
     const response = await fetch(Ipcim.Ipcim+"Nevezetessegek", 
@@ -68,10 +68,10 @@ function MasodikHomeScreen({ navigation, route }) {
   };
 
   useEffect(() => {
-    if (atkuld1) {
+    
       getNevezetessegek();
-    }
-  }, [atkuld1]);
+    
+  }, [atkuldOid]);
 
   return (
     <View style={{ backgroundColor: '#c5fffc', paddingBottom:350}}>
@@ -122,11 +122,15 @@ function MasodikHomeScreen({ navigation, route }) {
                   </Text>
                   <TouchableOpacity 
                     onPress={() => navigation.navigate('Orszagok', {
-                      atkuld1:item.Orszag_id,
-                      atkuld2:item.Orszag_nev,
-                      atkuld3:item.Orszag_szoveg,
-                      atkuld4:item.Orszag_zaszlo,
-                      atkuld5:item.Orszag_link
+                     /*1*/ atkuldOid:item.Orszag_id,
+                      /*2*/ atkuldOnev:item.Orszag_nev,
+                      /*3*/ atkuldOszoveg:item.Orszag_szoveg,
+                      /*4*/ atkuldOzaszlo:item.Orszag_zaszlo,
+                      /*5*/ atkuldOlink:item.Orszag_link,
+                      /*6*/ atkuldOkonzuli:item.Orszag_konzuli,
+                      /*7*/ atkuldOvaluta:item.Orszag_valuta,
+                      /*8*/ atkuldOidozona:item.Orszag_idozona,
+                      /*9*/ atkuldOvizum:item.Orszag_vizum
                     })} 
                   > 
                     <Image
@@ -192,12 +196,12 @@ function MasodikHomeScreen({ navigation, route }) {
                 <View>
                 <TouchableOpacity
               onPress={() => navigation.navigate('Nevezetessegek', {
-                atkuld1:item.Orszag_id,
-                atkuld2:item.Orszag_nev,
-                atkuld5:item.Nevezetesseg_nev,
-                atkuld6:item.Nevezetesseg_szoveg,
-                atkuld7:item.Nevezetesseg_kep,
-                atkuld8:item.Nevezetesseg_video,
+                atkuldOid:item.Orszag_id,
+                atkuldOnev:item.Orszag_nev,
+                atkuldNnev:item.Nevezetesseg_nev,
+                atkuldNszoveg:item.Nevezetesseg_szoveg,
+                atkuldNkep:item.Nevezetesseg_kep,
+                atkuldNvideo:item.Nevezetesseg_video,
               })}> 
               <Text 
                     style={{
@@ -240,15 +244,16 @@ function Root({ navigation }) {
       }}
       initialRouteName="Főoldal"> 
       <Drawer.Screen name="Főoldal" component={MasodikHomeScreen} />
-      <Drawer.Screen name="Orszagok" component={Orszagok}/>
       <Drawer.Screen name="Felvitel" component={Felvitel} />
       <Drawer.Screen name="Lenyilo" component={Lenyilo} />
-      <Drawer.Screen name="KözösScreen" component={KozosScreen} />
-      <Drawer.Screen name="Videó" component={Video} />
-      <Drawer.Screen name="Névjegy" component={Nevjegy} />
-      <Drawer.Screen name="KeresésSzöveg" component={KeresesSzoveg} />
+      <Drawer.Screen name="Országok" component={KozosScreen} />
+      <Drawer.Screen name="Ország keresés" component={KeresesSzoveg} />
       <Drawer.Screen name="Nevezetessegek" component={Nevezetessegek} />
       <Drawer.Screen name="KeresNevezetessegek" component={KeresesNevezetessegek}/>
+      <Drawer.Screen name="Videó" component={Video} />
+      <Drawer.Screen name="Névjegy" component={Nevjegy} />      
+      
+      
     </Drawer.Navigator>
   );
 }
@@ -257,8 +262,8 @@ export default function App() {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator>
-        <Stack.Screen name="Vissza" component={Root} options={{ headerShown: true }} />
-        <Stack.Screen name="Orszagok" component={Orszagok} />
+        <Stack.Screen name="Vissza" component={Root} options={{ headerShown: false }} />
+        <Stack.Screen name="Orszagok" component={Orszagok_megjelenites} options={{ headerShown: false }} />
         <Stack.Screen name="Nevezetessegek" component={Nevezetessegek} />
         <Stack.Screen name="KeresesNevezetessegek" component={KeresesNevezetessegek} />
 
