@@ -7,13 +7,11 @@ import { TouchableOpacity } from 'react-native'
 
 //--------   Hivatkozások   --------\\
 
-import Varos from './Varos'
-import Felvitel from './Felvitel'
-import Lenyilo from './Lenyilo'
-import KozosScreen from './KozosScreen'
-import Video from './Video'
-import Nevjegy from './Nevjegy'
-import KeresesSzoveg from './KeresesSzoveg'
+
+import Felvitel from './Felvitel';
+import KozosScreen from './KozosScreen';
+import Nevjegy from './Nevjegy';
+import KeresesSzoveg from './KeresesSzoveg';
 import Ipcim from './Ipcim';
 import Nevezetessegek from './Nevezetessegek';
 import Orszagok from './Orszagok';
@@ -75,25 +73,39 @@ function MasodikHomeScreen({ navigation, route }) {
   }, [atkuldOid]);
 
   return (
-    <View style={{ backgroundColor: '#c5fffc', paddingBottom:350}}>
+    <View style={{ backgroundColor: '#c5fffc', }}>
       <SafeAreaView>
         <ScrollView>
-          <View>
-            <ImageBackground
-              source={require('./orszagok_322_fda.jpg')}>
+          <View style={styles.row}>
+            
               <Text 
                 style={{
                   fontSize: 40,
                   marginLeft: 20,
-                  marginRight: 260,
-                  marginBottom: 10,
-                  marginTop: 19,
-                  backgroundColor: 'grey',
-                  opacity: 0.9
+                  //marginRight: 260,
+                  marginBottom: 2,
+                  marginTop: 29,
+                  //backgroundColor: 'grey',
+                  opacity: 0.9,
+                  alignItems:'center',
                 }}>
                 Országok
               </Text>
-            </ImageBackground>
+                
+              <Image 
+                source={require('./kepek/orszagok6260.png')} 
+                style=
+                    {
+                      {
+                            width:100,
+                            height:100, 
+                            backgroundColor: '#c5fffc', 
+                            marginLeft: 20, 
+                            marginRight: 'auto',
+                            marginBottom: 20
+                      }
+                    }
+            />
           </View>
 
           {/* Országok */}
@@ -105,17 +117,21 @@ function MasodikHomeScreen({ navigation, route }) {
                 key={item.Orszag_id}
                 style={{
                   flex: 2, 
-                  paddingLeft: 10, 
-                  paddingRight: 45, 
-                  backgroundColor: '#319ee0', 
+                  paddingLeft: 25, 
+                  paddingRight: 23, 
+                  backgroundColor: '#B3E0D7', 
                   paddingTop: 20, 
-                  paddingBottom: 20
+                  paddingBottom: 20,
+                  borderRadius:10,
+                  marginLeft:20,
+                  marginBottom:10,
+                  
                 }}>
                 <View>       
                   <Text 
                     style={{
                       fontWeight:'bold', 
-                      color: 'blue', 
+                      color: '#20B500', 
                       fontSize: 25, 
                       alignItems: 'center'
                     }}>
@@ -151,12 +167,14 @@ function MasodikHomeScreen({ navigation, route }) {
           </ScrollView>
           <View>
             <ImageBackground
-              source={require('./nevezetes_411.jpg')}>
+              source={require('./kepek/nevezetes_411.jpg')}>
+                <View style={styles.row}>
+                  
                 <View
                   style=
                   {
                     { 
-                      backgroundColor: '#f4ffc5',
+                       backgroundColor: '#f4ffc5',
                       marginLeft: 20,
                       marginRight: 245,
                       marginBottom: 20,
@@ -175,6 +193,21 @@ function MasodikHomeScreen({ navigation, route }) {
                 }}>
                 Nevezetességek
               </Text>
+              <Image 
+                source={require('./kepek/nevezetessegek234234.png')} 
+                style=
+                    {
+                      {
+                            width:100,
+                            height:100, 
+                            //backgroundColor: '#c5fffc', 
+                            marginLeft: 20, 
+                            marginRight: 'auto',
+                            marginBottom: 20
+                      }
+                    }
+            />
+              </View>
               </View>
             </ImageBackground>
           </View>
@@ -203,6 +236,7 @@ function MasodikHomeScreen({ navigation, route }) {
                 atkuldNszoveg:item.Nevezetesseg_szoveg,
                 atkuldNkep:item.Nevezetesseg_kep,
                 atkuldNvideo:item.Nevezetesseg_video,
+                atkuldNterkep:item.Nevezetesseg_terkep
               })}> 
               <Text 
                     style={{
@@ -246,12 +280,10 @@ function Root({ navigation }) {
       initialRouteName="Főoldal"> 
       <Drawer.Screen name="Főoldal" component={MasodikHomeScreen} />
       <Drawer.Screen name="Felvitel" component={Felvitel} />
-      <Drawer.Screen name="Lenyilo" component={Lenyilo} />
       <Drawer.Screen name="Országok" component={KozosScreen} />
       <Drawer.Screen name="Ország keresés" component={KeresesSzoveg} />
       <Drawer.Screen name="Nevezetessegek" component={Nevezetessegek} />
       <Drawer.Screen name="KeresNevezetessegek" component={KeresesNevezetessegek}/>
-      <Drawer.Screen name="Videó" component={Video} />
       <Drawer.Screen name="Névjegy" component={Nevjegy} />      
       
       
@@ -295,4 +327,12 @@ const styles = StyleSheet.create({
     fontFamily: 'HiraMinProN-W3',
     paddingBottom: 2,
   },
+  row: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    paddingTop: 20,
+    paddingBottom: 20,
+    alignItems:'center',
+  },  
 });

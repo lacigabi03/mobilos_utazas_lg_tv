@@ -4,7 +4,7 @@ import {StyleSheet, Text, ImageBackground, View, TouchableOpacity, Image} from '
 const HomeScreen = ({navigation}) => {
     return (
         <ImageBackground  
-      source={require('./HomeScreenHatter.jpg')}
+      source={require('./kepek/HomeScreenHatter.jpg')}
       style=
       {
         {
@@ -20,7 +20,7 @@ const HomeScreen = ({navigation}) => {
           Világ körül
         </Text>
       
-      <Image source={require('./travel.png')} style={styles.Travelpng}/>
+      <Image source={require('./kepek/travel.png')} style={styles.Travelpng}/>
       
         <TouchableOpacity
           style={styles.HomeScreenTouchableOpacity}

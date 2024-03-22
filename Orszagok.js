@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native';
 import { Linking } from 'react-native';
 
 const Orszagok = ({navigation, route}) => {
-    const {atkuldOid, atkuldOnev, atkuldOszoveg, atkuldOzaszlo, atkuldOlink, atkuldOkonzuli, atkuldOvaluta, atkuldOidozona, atkuldOvizum, atkuldNnev, atkuldNszoveg, atkuldNkep, atkuldNvideo } = route.params 
+    const {atkuldOid, atkuldOnev, atkuldOszoveg, atkuldOzaszlo, atkuldOlink, atkuldOkonzuli, atkuldOvaluta, atkuldOidozona, atkuldOvizum, atkuldNnev, atkuldNszoveg, atkuldNkep, atkuldNvideo, atkuldNterkep  } = route.params 
 
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
@@ -95,7 +95,7 @@ const Orszagok = ({navigation, route}) => {
             }
             >
             <Image 
-            source={require('./info1234.png')} 
+            source={require('./kepek/info1234.png')} 
             style=
                     {
                         {
@@ -124,7 +124,7 @@ const Orszagok = ({navigation, route}) => {
             }
             >
             <Image 
-            source={require('./valuta1230.png')} 
+            source={require('./kepek/valuta1230.png')} 
             style=
                     {
                         {
@@ -151,7 +151,7 @@ const Orszagok = ({navigation, route}) => {
             }
             >
             <Image 
-            source={require('./idozona321.png')} 
+            source={require('./kepek/idozona321.png')} 
             style=
                     {
                         {
@@ -178,7 +178,7 @@ const Orszagok = ({navigation, route}) => {
             }
             >
             <Image 
-            source={require('./vizum123.png')} 
+            source={require('./kepek/vizum123.png')} 
             style=
                     {
                         {
@@ -217,7 +217,22 @@ const Orszagok = ({navigation, route}) => {
                 >
                 {atkuldOszoveg}
                 </Text>
-                
+
+
+                <View style={styles.row}>
+                <Text style={{textAlign:'center', marginTop:40, marginLeft:120}}>{atkuldOnev}i {'\n'} nevezetességek</Text>
+                <Image source={require('./kepek/keresnevezetessegek3131.png')} 
+            style=
+                    {
+                        {
+                            width:70,
+                            height:70, 
+                            backgroundColor: '#D1F2EB', 
+                            marginLeft: 20, 
+                            marginRight: 'auto'
+                        }
+                    }/>
+                </View>    
             <View
                 style=
                 {
@@ -238,6 +253,7 @@ const Orszagok = ({navigation, route}) => {
                   }
                 }
             >
+               
             <Button 
                 onPress=
                     {() => navigation.navigate('Nevezetessegek',
@@ -246,7 +262,8 @@ const Orszagok = ({navigation, route}) => {
                             atkuldNnev:atkuldNnev,
                             atkuldNszoveg:atkuldNszoveg,
                             atkuldNkep:atkuldNkep,
-                            atkuldNvideo:atkuldNvideo
+                            atkuldNvideo:atkuldNvideo,
+                            atkuldNterkep:atkuldNterkep
                         }
                     )}
                 title="Részletek"
@@ -277,7 +294,7 @@ const Orszagok = ({navigation, route}) => {
                         width: 400,
                         height: 300,
                         marginTop: 10, 
-                        marginBottom: 200,
+                        marginBottom: 40,
                         marginLeft: 10
 
                     }
@@ -305,16 +322,19 @@ const styles =StyleSheet.create({
         
     },
     valamiszoveg: {
-        fontSize: 30,
+        fontSize: 28,
         fontFamily: 'Avenir Next Condensed',
         paddingTop: 35,
         marginLeft: 10,
         marginRight: 10,
+        paddingBottom:20
         
     },
     scrollView : {
         backgroundColor: '#D1F2EB',
-        flex: 1
+        flex: 1,
+        
+        
     },
     row: {
         flexDirection: 'row',

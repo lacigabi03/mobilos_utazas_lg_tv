@@ -123,7 +123,7 @@ const createFormData = (photo, body = {}) => {
   };
 
   return (
-    <ImageBackground source={require('./felvielhatter.jpg')} style={{width: '100%', height: '100%'}}>
+    <ImageBackground source={require('./kepek/felvielhatter.jpg')} style={{width: '100%', height: '100%'}}>
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <View style={{paddingBottom: 20, }}>
     <View 

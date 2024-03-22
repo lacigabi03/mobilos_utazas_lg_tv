@@ -48,7 +48,7 @@ const Nevjegy = () => {
             }
             >
             <Image 
-            source={require('./nevjegy123.png')} 
+            source={require('./kepek/nevjegy123.png')} 
             style=
                     {
                         {
