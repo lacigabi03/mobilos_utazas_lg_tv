@@ -20,6 +20,7 @@ import Orszagok from './Orszagok';
 import KeresesNevezetessegek from './KeresNevezetessegek';
 import { Picker } from '@react-native-picker/picker';
 
+
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -122,15 +123,15 @@ function MasodikHomeScreen({ navigation, route }) {
                   </Text>
                   <TouchableOpacity 
                     onPress={() => navigation.navigate('Orszagok', {
-                     /*1*/ atkuldOid:item.Orszag_id,
-                      /*2*/ atkuldOnev:item.Orszag_nev,
-                      /*3*/ atkuldOszoveg:item.Orszag_szoveg,
-                      /*4*/ atkuldOzaszlo:item.Orszag_zaszlo,
-                      /*5*/ atkuldOlink:item.Orszag_link,
-                      /*6*/ atkuldOkonzuli:item.Orszag_konzuli,
-                      /*7*/ atkuldOvaluta:item.Orszag_valuta,
-                      /*8*/ atkuldOidozona:item.Orszag_idozona,
-                      /*9*/ atkuldOvizum:item.Orszag_vizum
+                      atkuldOid:item.Orszag_id,
+                      atkuldOnev:item.Orszag_nev,
+                      atkuldOszoveg:item.Orszag_szoveg,
+                      atkuldOzaszlo:item.Orszag_zaszlo,
+                      atkuldOlink:item.Orszag_link,
+                      atkuldOkonzuli:item.Orszag_konzuli,
+                      atkuldOvaluta:item.Orszag_valuta,
+                      atkuldOidozona:item.Orszag_idozona,
+                      atkuldOvizum:item.Orszag_vizum
                     })} 
                   > 
                     <Image
@@ -263,8 +264,8 @@ export default function App() {
     <NavigationContainer independent={true}>
       <Stack.Navigator>
         <Stack.Screen name="Vissza" component={Root} options={{ headerShown: false }} />
-        <Stack.Screen name="Orszagok" component={Orszagok_megjelenites} options={{ headerShown: false }} />
-        <Stack.Screen name="Nevezetessegek" component={Nevezetessegek} />
+        <Stack.Screen name="Orszagok" component={Orszagok} options={{ headerShown: true }} />
+        <Stack.Screen name="Nevezetessegek" component={Nevezetessegek} options={{ headerShown: true }}/>
         <Stack.Screen name="KeresesNevezetessegek" component={KeresesNevezetessegek} />
 
 

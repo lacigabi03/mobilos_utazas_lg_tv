@@ -5,8 +5,8 @@ import { WebView } from 'react-native-webview';
 import { TouchableOpacity } from 'react-native';
 import { Linking } from 'react-native';
 
-const Orszagok_megjelenites = ({navigation, route}) => {
-    const {atkuldOid, atkuldOnev, atkuldOszoveg, atkuldOzaszlo, atkuldOlink, atkuldOkonzuli, atkuldOvaluta, atkuldOidozona, atkuldOvizum, atkuldNnev, atkuldNszoveg, atkuldNkep, atkuldNvideo } = route?.params ?? {};
+const Orszagok = ({navigation, route}) => {
+    const {atkuldOid, atkuldOnev, atkuldOszoveg, atkuldOzaszlo, atkuldOlink, atkuldOkonzuli, atkuldOvaluta, atkuldOidozona, atkuldOvizum, atkuldNnev, atkuldNszoveg, atkuldNkep, atkuldNvideo } = route.params 
 
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
@@ -332,4 +332,4 @@ const styles =StyleSheet.create({
       },
 });
 
-export default Orszagok_megjelenites;
+export default Orszagok;
