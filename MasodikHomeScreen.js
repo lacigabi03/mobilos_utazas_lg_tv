@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, SafeAreaView, ImageBackground, Button, StyleSheet, ScrollView, FlatList, Image } from 'react-native';
+import { Text, View, SafeAreaView, ImageBackground, Button, StyleSheet, ScrollView, FlatList, Image, DefaultTheme } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'; 
@@ -16,11 +16,27 @@ import Ipcim from './Ipcim';
 import Nevezetessegek from './Nevezetessegek';
 import Orszagok from './Orszagok';
 import KeresesNevezetessegek from './KeresNevezetessegek';
-import { Picker } from '@react-native-picker/picker';
+
+
+//Viktor
+import Varoskeres from "./Varoskeres";
+import Varosrepjegykeres from "./Varosrepjegykeres";
+import Video from "./Video";
 
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    backgroundColor: '#A8B0FF',
+    primary: '#A8B0FF',
+    card: '#A8B0FF',
+    text: '#3E6F56',
+    border: '#8C8C88'
+  }
+}
 
 function MasodikHomeScreen({ navigation, route }) {
   const [isLoading, setLoading] = useState(true);
@@ -169,46 +185,36 @@ function MasodikHomeScreen({ navigation, route }) {
             <ImageBackground
               source={require('./kepek/nevezetes_411.jpg')}>
                 <View style={styles.row}>
-                  
-                <View
-                  style=
+            
+            <Text 
+              style={{
+                fontSize: 40,
+                marginLeft: 20,
+                //marginRight: 260,
+                marginBottom: 2,
+                marginTop: 29,
+                //backgroundColor: 'grey',
+                opacity: 0.9,
+                alignItems:'center',
+              }}>
+              Nevezetességek
+            </Text>
+              
+            <Image 
+              source={require('./kepek/nevezetessegek234234.png')} 
+              style=
                   {
-                    { 
-                       backgroundColor: '#f4ffc5',
-                      marginLeft: 20,
-                      marginRight: 245,
-                      marginBottom: 20,
-                      marginTop: 20,
-                      overflow:'hidden',
-                      borderRadius:10,  
-                      alignItems: 'center',  
-                    }
-                  }>
-              <Text 
-                style={{
-                  fontSize: 25,
-                  backgroundColor: '#f4ffc5',
-                  opacity: 0.8,
-                  borderRadius:10,
-                }}>
-                Nevezetességek
-              </Text>
-              <Image 
-                source={require('./kepek/nevezetessegek234234.png')} 
-                style=
                     {
-                      {
-                            width:100,
-                            height:100, 
-                            //backgroundColor: '#c5fffc', 
-                            marginLeft: 20, 
-                            marginRight: 'auto',
-                            marginBottom: 20
-                      }
+                          width:100,
+                          height:100, 
+                          //backgroundColor: '#c5fffc', 
+                          marginLeft: 20, 
+                          marginRight: 'auto',
+                          marginBottom: 20
                     }
-            />
-              </View>
-              </View>
+                  }
+          />
+        </View>
             </ImageBackground>
           </View>
           
@@ -284,7 +290,12 @@ function Root({ navigation }) {
       <Drawer.Screen name="Ország keresés" component={KeresesSzoveg} />
       <Drawer.Screen name="Nevezetessegek" component={Nevezetessegek} />
       <Drawer.Screen name="KeresNevezetessegek" component={KeresesNevezetessegek}/>
-      <Drawer.Screen name="Névjegy" component={Nevjegy} />      
+      <Drawer.Screen name="Névjegy" component={Nevjegy} />
+
+
+      <Drawer.Screen name="Város keresése" component={Varoskeres} />  
+      <Drawer.Screen name="Repülőjegy város" component={Varosrepjegykeres} />    
+      <Drawer.Screen name="Súgó" component={Video} />
       
       
     </Drawer.Navigator>
@@ -293,7 +304,7 @@ function Root({ navigation }) {
 
 export default function App() {   
   return (
-    <NavigationContainer independent={true}>
+    <NavigationContainer independent={true} theme={MyTheme}>
       <Stack.Navigator>
         <Stack.Screen name="Vissza" component={Root} options={{ headerShown: false }} />
         <Stack.Screen name="Orszagok" component={Orszagok} options={{ headerShown: true }} />
