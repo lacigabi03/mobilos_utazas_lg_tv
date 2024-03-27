@@ -30,9 +30,9 @@ const Drawer = createDrawerNavigator();
 const MyTheme = {
   ...DefaultTheme,
   colors: {
-    backgroundColor: '#A8B0FF',
-    primary: '#A8B0FF',
-    card: '#A8B0FF',
+    backgroundColor: '#9CD3FF',
+    primary: '#FFF64C',
+    card: '#9CD3FF',
     text: '#3E6F56',
     border: '#8C8C88'
   }
@@ -89,7 +89,7 @@ function MasodikHomeScreen({ navigation, route }) {
   }, [atkuldOid]);
 
   return (
-    <View style={{ backgroundColor: '#c5fffc', }}>
+    <View style={{ backgroundColor: '#c5fffc', flex:1}}>
       <SafeAreaView>
         <ScrollView>
           <View style={styles.row}>
@@ -182,8 +182,7 @@ function MasodikHomeScreen({ navigation, route }) {
             ))}
           </ScrollView>
           <View>
-            <ImageBackground
-              source={require('./kepek/nevezetes_411.jpg')}>
+            
                 <View style={styles.row}>
             
             <Text 
@@ -193,7 +192,6 @@ function MasodikHomeScreen({ navigation, route }) {
                 //marginRight: 260,
                 marginBottom: 2,
                 marginTop: 29,
-                //backgroundColor: 'grey',
                 opacity: 0.9,
                 alignItems:'center',
               }}>
@@ -215,7 +213,7 @@ function MasodikHomeScreen({ navigation, route }) {
                   }
           />
         </View>
-            </ImageBackground>
+            
           </View>
           
           {/* Nevezetességek */}
@@ -229,12 +227,13 @@ function MasodikHomeScreen({ navigation, route }) {
                   flex: 2, 
                   paddingLeft: 10, 
                   paddingRight: 45, 
-                  backgroundColor: '#319ee0', 
+                  backgroundColor: '#c5fffc', 
                   paddingTop: 20, 
-                  paddingBottom: 20
+                  paddingBottom: 20,
                 }}>
                 <View>
                 <TouchableOpacity
+                style={{backgroundColor:'#00B6AC', borderRadius: 10, paddingLeft: 5, paddingRight:5, paddingBottom: 5, paddingTop: 5}}
               onPress={() => navigation.navigate('Nevezetessegek', {
                 atkuldOid:item.Orszag_id,
                 atkuldOnev:item.Orszag_nev,
@@ -259,6 +258,11 @@ function MasodikHomeScreen({ navigation, route }) {
               </View>
             ))}
           </ScrollView>
+
+
+
+
+        
         </ScrollView>
       </SafeAreaView>
     </View>
@@ -288,7 +292,7 @@ function Root({ navigation }) {
       <Drawer.Screen name="Felvitel" component={Felvitel} />
       <Drawer.Screen name="Országok" component={KozosScreen} />
       <Drawer.Screen name="Ország keresés" component={KeresesSzoveg} />
-      <Drawer.Screen name="Nevezetessegek" component={Nevezetessegek} />
+      {/*<Drawer.Screen name="Nevezetessegek" component={Nevezetessegek} />*/}
       <Drawer.Screen name="KeresNevezetessegek" component={KeresesNevezetessegek}/>
       <Drawer.Screen name="Névjegy" component={Nevjegy} />
 

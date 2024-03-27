@@ -27,9 +27,9 @@ const Nevjegy = () => {
         <TouchableOpacity onPress={() => {
                  {
                     Alert.alert(
-                      "A szakdolgozatot készítette: "  
+                      "A szakdolgozatot készítették: "  
                       + 
-                      "\nLászló Gábor"
+                      "\nLászló Gábor és Tóth Viktor"
                       +
                       "\n\n\nProjekt témája: "
                       +
@@ -62,7 +62,7 @@ const Nevjegy = () => {
             />
             
             </TouchableOpacity>
-            <Text style={{fontWeight:'bold', fontSize:'25'}}>Névjegy infórmációért katt a képre!</Text>
+            <Text style={{fontWeight:'bold', fontSize:25}}>Névjegy infórmációért katt a képre!</Text>
       
 
       
